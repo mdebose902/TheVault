@@ -1,12 +1,23 @@
+from xml.dom import UserDataHandler
 import psycopg2
 from config import config
+from hash import hasher
 
 
 def insert():
 
     #data to be inserted
+
+    #SQL query to insert data
     SQL = "INSERT INTO accounts (site,username,password) VALUES (%s,%s,%s)"
-    data = ('cutecatpics','ImThatGuy','ILoveCats')
+
+    #getting user input
+    website = input("Website: ")
+    username = input("Username: ")
+    password = input("password: ")
+
+    #data tuple
+    data = (website,username,hasher(password))
     website = None
     try:
         params = config()
